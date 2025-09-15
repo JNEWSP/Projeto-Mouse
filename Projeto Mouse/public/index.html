@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controle do Mouse</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Controle do Mouse</h1>
+  <button id="move-mouse">Mover o Mouse</button>
+  <button id="click-mouse">Clicar no Mouse</button>
+  <button id="scroll-mouse-up">Rolando o Mouse para Cima</button>
+  <button id="scroll-mouse-down">Rolando o Mouse para Baixo</button>
+  <script>
+    const socket = io();
+
+    document.getElementById('move-mouse').addEventListener('click', () => {
+      socket.emit('mouse_move', { x: 100, y: 100 });
+    });
+
+    document.getElementById('click-mouse').addEventListener('click', () => {
+      socket.emit('mouse_click');
+    });
+
+    document.getElementById('scroll-mouse-up').addEventListener('click', () => {
+      socket.emit('mouse_scroll', { direction: 'up' });
+    });
+
+    document.getElementById('scroll-mouse-down').addEventListener('click', () => {
+      socket.emit('mouse_scroll', { direction: 'down' });
+    });
+  </script>
+</body>
+</html>
